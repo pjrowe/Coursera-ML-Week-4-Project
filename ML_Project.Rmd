@@ -1,0 +1,212 @@
+---
+title: "Predicting Performance of Dumbell Curl from Accelerometer Data"
+author: "Phillip Rowe"
+date: "10/23/2019"
+output: #word_document
+  html_document:
+    toc: true
+    toc_depth: 4
+#     md_document: 
+#          variant: markdown_github
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Executive Summary
+
+We trained a random forest model and used it to make 20 predictions with 100% accuracy how a dumbell lift was being performed.  
+
+## Objective 
+
+The goal of this project is to create a model that predicts whether participants perform a dumbell curl correctly.  Data was collected from four accelerometers, attached to the belt, forearm, arm, and dumbell of 6 participants who performed the lift in five different ways, labeled as follows: exactly according to the specification (Class A), throwing the elbows to the front (Class B), lifting the dumbbell only halfway (Class C), lowering the dumbbell only halfway (Class D) and throwing the hips to the front (Class E).
+
+## Exploratory Data Analysis 
+
+The dataset consists of 160 columns: 38 measurements on 4 different accelerometers for a total of 152 variables, one label, one index variable, the subject's name, and 2 window numbers, and 3 timestamps.  A number of the 152 'measurement' variables were actually calculated based on various accelerometer measurements in a time sample window (e.g., maximum, minimum, average measurements).  These 'calculated' columns therefore were mostly empty or contained mostly 'NAs'. Because these columns offered no predictive value, they were filtered out.  Also, because each class of performance was stored sequentially in time, we eliminated or did not use timestamp variables in our prediction model, as that would have been 'cheating'.  For example, subject Pedro's correct dumbell lift (classe A) would occur during a set number of sequential time samples, and any timestamp in such interval could be easily classified as part of the correct performance. Thus, the 58 predictor variables used in our final random forest model included the user_name and 57 acceleromters readings. 
+
+In Figure 1, we plot the first two accelerometer variables (roll_belt and pitch_belt) and see they produce overlapping clusters depending on the class (type of lift).  Each user, denoted by a different color, had a very different location of the cluster of readings.  We denoted the correct lifts for each user in the upper left chart. The four incorrect lifts were shown in the upper right.  The lower left plot is the correct lift of subject 'pedro' (shown in pink in the two upper charts), and the lower right is all five types of lift by 'pedro.' We are not sure why each user has a different mean for doing the same class of lift, but we assume the this could be explained by perhaps having differently calibrated accelerometers or their different body shapes or sizes.  In any case, it is clear that the 'big' separation of each cluster and each subcluster would lend itself to a random forest or principal component analysis or support vector machine type of classification. Given the high performance of the random forest, we did not bother testing a SVM.
+
+## How Model Was Built and Cross Validation
+
+While we also tried a linear discriminant analysis (LDA) model with and without timestamps, the random forest model provided much better accuracy and was 100% accurate on the 20 test samples provided by Coursera.  The caret package random forest function did not complete its calculation on a high powered laptop, for some reason, so we used the randomForest package instead.  
+
+Having  over 14,000 observations in the original dataset (several thousand for each of the experimental subjects) seemed plenty of data, so the training data set was split into 75% training and 25% cross validation data.  
+
+A PCA analysis shows in in Figure 2 (labeled in code chunk) that 81% of the variance is explained by the first 12 accelerometer variables (user_name and time stamps were excluded from this PCA analysis).
+
+Based on the confusion matrix in Figure 3, we see that the accuracy was 99.6%, meaning the error was less than 1%.  We would expect our out of sample error to be similarly small, perhas slightly larger.  We also calculated the error for a random forest that excluded user_name and found similar accuracy.  Thus, the accelerometer reading alone were sufficient to generate an extremely accurate model.
+
+We calculate the importance of each variable, showing that roll_belt was the most important.  Figure 4 shows a summary of the random forest model with 500 trees.
+
+``` {r load, cache=TRUE, echo=TRUE, message=FALSE,comment=FALSE}
+
+library("dplyr")
+library(lubridate)
+library(ggplot2)
+#install.packages('downloader')
+library(downloader)
+library('stringr')
+library('tibble')
+library('reshape2')
+library(ModelMetrics)
+library(AppliedPredictiveModeling)
+library(caret)
+library(gbm)
+library(MASS)
+ 
+#---------------------------------------------------------------------------------------
+#
+# Load and Clean Data 
+#
+#---------------------------------------------------------------------------------------
+# 
+#url1<-'https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv'
+#url2<-'https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv'
+#download(url1,dest="pml-training.csv")  
+#download(url2,dest='pml-testing.csv')
+training<-read.csv('pml-training.csv')
+testing<-read.csv('pml-testing.csv')
+
+set.seed(123)
+intrain<-createDataPartition(training$classe, p = .75)[[1]]
+cvtrain<-training[-intrain,]
+traintrain<-training[intrain,]
+
+```
+
+``` {r , echo=FALSE, message=FALSE,comment=FALSE, warning = FALSE}
+# these lines turn the columns with factor variables into numeric columns; 
+# this also turns empty cells (i.e., with "") into NAs, which we can search for in next loop
+traintrain[,8:159]<-apply(traintrain[,8:159],2,as.character)
+traintrain[,8:159]<-apply(traintrain[,8:159],2,as.numeric)
+testing[,8:160]<-apply(testing[,8:160],2,as.character)
+testing[,8:160]<-apply(testing[,8:160],2,as.numeric)
+
+```
+
+``` {r , cache=TRUE, echo=TRUE, message=FALSE,comment=FALSE,warning = FALSE}
+ 
+# find which columns have lots of NAs, that way we can remove those columns 
+
+nas=c()
+# a 160-long vector which shows how many NAs are in each column on traintrain dataframe
+for (i in 1:160) {
+    nas=c(nas,sum(is.na(traintrain[,i])))
+}
+
+nas_test=c()
+# a 160-long vector which shows how many NAs are in each column on traintrain dataframe
+for (i in 1:160) {
+    nas_test=c(nas_test,sum(is.na(testing[,i])))
+}
+# we will train using gooddata, which only has full columns of data
+gooddata=traintrain[,!(nas>1)]
+goodcv = cvtrain[,!(nas>1)]
+goodtest=testing[,!(nas_test>1)]
+
+# removing the "X" or index column, since the data is stored sequentially, i.e., first all  
+# of class A, then all of class B, then all C, etc., so we shouldn't allow training to 
+# simply look at the index
+gooddata=gooddata[,-1]
+goodcv = goodcv[,-1]
+goodtest=goodtest[,c(-1,-60)] # there is a 'problem_id' column in position 60 
+
+#plot(gooddata$roll_belt,gooddata$pitch_belt,col=gooddata$user_name, xlim=c(-10,160), 
+#     ylim=c(-60,60)))
+#plot(gooddata$roll_belt,gooddata$pitch_belt,col=gooddata$classe, xlim=c(-10,160), 
+#     ylim=c(-60,60)))
+
+#---------------------------------------------------------------------------------------
+#
+# Exploratory Data Analysis
+#
+#---------------------------------------------------------------------------------------
+
+Adata=gooddata[gooddata$classe=='A',]
+rest_data=gooddata[gooddata$classe!='A',]
+carl=gooddata[gooddata$user_name=='carlitos',]
+carlA=gooddata[(gooddata$classe=='A')&(gooddata$user_name=='carlitos'),]
+pedro=gooddata[gooddata$user_name=='pedro',]
+pedroA=gooddata[(gooddata$classe=='A')&(gooddata$user_name=='pedro'),]
+
+par(mfrow=c(2,2), mai = c(1, 0.9, 0.5, .1))
+plot(Adata$roll_belt,Adata$pitch_belt,col=Adata$user_name, xlim=c(-10,160), ylim=c(-60,60))
+plot(rest_data$roll_belt,rest_data$pitch_belt,col=rest_data$user_name, xlim=c(-10,160), 
+     ylim=c(-60,60))
+
+#plot(carl$roll_belt,carl$pitch_belt,col=carl$classe, xlim=c(-10,20), ylim=c(00,20))
+#plot(carlA$roll_belt,carlA$pitch_belt,col=carlA$classe, xlim=c(-10,20), ylim=c(0,20))
+#plot(pedroA$roll_belt,pedroA$pitch_belt,col=pedroA$classe, xlim=c(110,150), ylim=c(15,30))
+#plot(pedro$roll_belt,pedro$pitch_belt,col=pedro$classe, xlim=c(110,150), ylim=c(15,30))
+plot(pedroA$roll_belt,pedroA$pitch_belt,col=pedroA$classe, xlim=c(-10,160), ylim=c(-60,60))
+plot(pedro$roll_belt,pedro$pitch_belt,col=pedro$classe, xlim=c(-10,160), ylim=c(-60,60))
+mtext("Figure 1. Exploratory Data Analysis", side = 3, line = -16, outer = TRUE)
+
+# ---------------------------------------------------------------------------------------
+# FIGURE 2. 
+#
+# PCA decomposition shows how 12 components account for 81% of variance, so a discriminant 
+# analysis (i.e., lda) obviously makes sense as model choice.  LDA turns out to be less 
+# accurate than random forest, however.
+# ---------------------------------------------------------------------------------------
+
+# we exclude name label and timestamps and classe columns, leaving just accelerometer readings
+model.pr <- prcomp(gooddata[,c(7:58)], center = TRUE, scale = TRUE)
+summary(model.pr)
+
+# ---------------------------------------------------------------------------------------
+#  
+# Random Forest Model
+#
+# ---------------------------------------------------------------------------------------
+
+set.seed(222)
+library(randomForest)
+# avoid including time stamps which would make it too easy
+x_rf=gooddata[,c(-(2:6),-59)]
+rf<-randomForest(x_rf,y=gooddata[,59])
+# these others yield same accuracy 
+#rf2<-randomForest(gooddata[,-59],y=gooddata[,59])
+#rf3<-randomForest(gooddata[,c(-1,-(2:6),-59)],y=gooddata[,59])
+
+rf_cv=predict(rf,newdata=goodcv[,c(-(2:6),-59)])
+#rf_cv3=predict(rf,newdata=goodcv[,c(-(2:6),-59)])
+
+# ---------------------------------------------------------------------------------------
+#
+#  Figure 3. Confusion Matrix of Random Forest vs. Cross Validation Data
+#
+# ---------------------------------------------------------------------------------------
+confusionMatrix(rf_cv,goodcv[,59])
+#confusionMatrix(rf_cv3,goodcv[,59])
+
+rf_pred=predict(rf,newdata=goodtest[,c(-(2:6))])
+# agrees with pred_lda_test 18 out of 20 times; on index #2 and #8, both of which I got wrong # on quiz, so perhaps rf model is better?
+
+rf_pred
+# 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
+# B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
+
+# Shows error in relation to 3 trees; rf has 500 trees (near the max on the plot, I think, 
+# which minimizes the error rate)
+plot(rf,type='l',amain=deparse(substitute(rf)), main='Figure 4. Error vs. # Trees')
+
+var_rf=data.frame(cbind(names(x_rf),val=varImp(rf)[1:53,]))
+var_rf$val=as.numeric(as.character(var_rf$val))
+vars_rfsorted=var_rf[order(-var_rf[,2]),]
+
+# ---------------------------------------------------------------------------------------
+#
+#  Variables Sorted by Importance
+#
+# ---------------------------------------------------------------------------------------
+vars_rfsorted
+rf
+
+```
+
+ 
+ 
