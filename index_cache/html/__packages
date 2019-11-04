@@ -1,0 +1,15 @@
+base
+dplyr
+lubridate
+ggplot2
+downloader
+stringr
+tibble
+reshape2
+ModelMetrics
+AppliedPredictiveModeling
+lattice
+caret
+gbm
+MASS
+randomForest
