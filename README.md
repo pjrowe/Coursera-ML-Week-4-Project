@@ -26,15 +26,26 @@ https://www.coursera.org/learn/machine-learning-asset-management-alternative-dat
 https://www.coursera.org/specializations/jhu-data-science?
 - Enrolled June 2019 – present
 - Languages and platforms/software used: R/RStudio, Shiny
+
 - Course 1  - The Data Scientist’s Toolbox - completed June 2019
+https://www.coursera.org/account/accomplishments/records/BZ26PUEVKYAU
 - Course 2  - R Programming - completed July 2019
+https://www.coursera.org/account/accomplishments/records/C8ZMBP2F7UCK
 - Course 3  - Getting and Cleaning Data - completed August 2019 
+https://www.coursera.org/account/accomplishments/records/B9QBDAX7HK9P
 - Course 4  - Exploratory Data Analysis - completed August 2019
+https://www.coursera.org/account/accomplishments/records/MPHEY2LNZDFE
 - Course 5  - Reproducible Research - completed August 2019
+https://www.coursera.org/account/accomplishments/records/JGMN3S3L4TXM
+
 - Course 6  - Statistical Inference - completed September 2019
+https://www.coursera.org/account/accomplishments/records/JCZ2AAJJHR4E
 - Course 7  - Regression Models - completed October 2019
+https://www.coursera.org/account/accomplishments/records/SQ5KUEQDJUNW
 - Course 8  - Practical Machine Learning - completed November 2019
+https://www.coursera.org/account/accomplishments/records/6JBRPK8TH6PN
 - Course 9  - Developing Data Products - completed November 2019
+https://www.coursera.org/account/accomplishments/records/3JHR7UWGN7CL
 - Course 10 - Data Science Capstone - in progress
 
 ## Stanford University on Coursera 
