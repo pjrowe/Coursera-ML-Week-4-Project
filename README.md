@@ -4,7 +4,8 @@
 
 # Phillip Rowe Coursework on Coursera
 
-## EDHEC BUSINESS SCHOOL ON COURSERA - Investment Management with Python and Machine Learning (4 courses, 70+ hours)
+## EDHEC BUSINESS SCHOOL ON COURSERA 
+## Investment Management with Python and Machine Learning (4 courses, 70+ hours)
 -	Nov 2019 – present -  4 courses on portfolio construction and analysis with Python and machine learning, focusing on the theory and implementation of modern computational and statistical methods in the design of more robust diversification and risk management models
 - Course 1 - Introduction to Portfolio Construction and Analysis with Python - completed Nov 27, 2019
 https://www.coursera.org/account/accomplishments/verify/XEL5S8CA2U7S
