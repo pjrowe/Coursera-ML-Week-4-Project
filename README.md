@@ -1,5 +1,7 @@
 # Coursera-ML-Week-4-Project
 - This repository contains the files for the final project for Week 4 of Course 7 - Machine Learning of Johns Hopkins Data Science Specialization
+- : The goal of the project is to build a model to predict the manner in which human subjects performed various exercises, across 20 different test cases.
+- : A report describing how I built the predictive model, how I used cross validation, and my estimate of the sample error is.
 
 
 # Phillip Rowe Coursework on Coursera
