@@ -24,9 +24,9 @@ https://www.coursera.org/learn/machine-learning-asset-management-alternative-dat
 ## Johns Hopkins on Coursera 
 ### Data Science Specialization 
 #### 10 courses, 140+ hours total
+#### - Languages and platforms/software used: R/RStudio, Shiny
 https://www.coursera.org/specializations/jhu-data-science?
 - Enrolled June 2019 – present
-- Languages and platforms/software used: R/RStudio, Shiny
 
 - Course 1  - The Data Scientist’s Toolbox - completed June 2019
 https://www.coursera.org/account/accomplishments/records/BZ26PUEVKYAU
@@ -52,6 +52,6 @@ https://www.coursera.org/account/accomplishments/records/3JHR7UWGN7CL
 ## Stanford University on Coursera 
 ### Machine Learning with Professor Andrew Ng 
 #### Self paced 11 module course, 55+ hours
+#### - Languages and platforms/software used: Matlab
 https://www.coursera.org/account/accomplishments/verify/QPBXXBNQ82CP
 - Enrolled April 2019, completed June 11, 2019
-- Languages and platforms/software used: Matlab
