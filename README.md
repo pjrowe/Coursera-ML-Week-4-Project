@@ -1,5 +1,5 @@
 # Coursera-ML-Week-4-Project
-- Course 7 - Machine Learning Week 4 Project  
+- This repository contains the files for the final project for Week 4 of Course 7 - Machine Learning of Johns Hopkins Data Science Specialization
 
 
 # Phillip Rowe Coursework on Coursera
