@@ -9,6 +9,8 @@
 #### 4 courses, 70+ hours
 https://www.coursera.org/specializations/investment-management-python-machine-learning?
 -	Nov 2019 – present -  4 courses on portfolio construction and analysis with Python and machine learning, focusing on the theory and implementation of modern computational and statistical methods in the design of more robust diversification and risk management models
+- Languages and platforms/software used: Python, Anaconda, JupyterLab/Notebook
+
 - Course 1 - Introduction to Portfolio Construction and Analysis with Python - completed Nov 27, 2019
 https://www.coursera.org/account/accomplishments/verify/XEL5S8CA2U7S
 - Course 2 - Advanced Portfolio Construction and Analysis with Python - completed December 10, 2019
@@ -23,6 +25,7 @@ https://www.coursera.org/learn/machine-learning-asset-management-alternative-dat
 #### 10 courses, 140+ hours total
 https://www.coursera.org/specializations/jhu-data-science?
 - Enrolled June 2019 – present
+- Languages and platforms/software used: R/RStudio, Shiny
 - Course 1  - The Data Scientist’s Toolbox - completed June 2019
 - Course 2  - R Programming - completed July 2019
 - Course 3  - Getting and Cleaning Data - completed August 2019 
@@ -39,3 +42,4 @@ https://www.coursera.org/specializations/jhu-data-science?
 #### Self paced 11 module course, 55+ hours
 https://www.coursera.org/account/accomplishments/verify/QPBXXBNQ82CP
 - Enrolled April 2019, completed June 11, 2019
+- Languages and platforms/software used: Matlab
