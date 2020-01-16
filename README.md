@@ -1,8 +1,8 @@
 # Coursera-ML-Week-4-Project
 - Course 7 - Machine Learning Week 4 Project  
 
-## Phillip Rowe 
-- Coursework on Coursera
+
+# Phillip Rowe Coursework on Coursera
 
 ## EDHEC BUSINESS SCHOOL ON COURSERA - Investment Management with Python and Machine Learning (4 courses, 70+ hours)
 -	Nov 2019 – present -  4 courses on portfolio construction and analysis with Python and machine learning, focusing on the theory and implementation of modern computational and statistical methods in the design of more robust diversification and risk management models
@@ -16,6 +16,19 @@ https://www.coursera.org/account/accomplishments/verify/R5NTFNMF67P4
 https://www.coursera.org/learn/machine-learning-asset-management-alternative-data/home/info
 
 ## Johns Hopkins on Coursera - Data Science Specialization - (10 courses/ 140+ hours total)
+https://www.coursera.org/specializations/jhu-data-science?
 - Enrolled June 2019 – present
-- Course 1 - R Programming
-- Course 2 - R Programming
+- Course 1  - The Data Scientist’s Toolbox - completed June 2019
+- Course 2  - R Programming - completed July 2019
+- Course 3  - Getting and Cleaning Data - completed August 2019 
+- Course 4  - Exploratory Data Analysis - completed August 2019
+- Course 5  - Reproducible Research - completed August 2019
+- Course 6  - Statistical Inference - completed September 2019
+- Course 7  - Regression Models - completed October 2019
+- Course 8  - Practical Machine Learning - completed November 2019
+- Course 9  - Developing Data Products - completed November 2019
+- Course 10 - Data Science Capstone - in progress
+
+## Stanford University on Coursera - Machine Learning with Professor Andrew Ng (11 week course, 55+ hours)
+https://www.coursera.org/account/accomplishments/verify/QPBXXBNQ82CP
+- Enrolled April 2019 – June 2019
