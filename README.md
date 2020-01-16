@@ -38,4 +38,4 @@ https://www.coursera.org/specializations/jhu-data-science?
 ### Machine Learning with Professor Andrew Ng 
 #### 11 week course, 55+ hours
 https://www.coursera.org/account/accomplishments/verify/QPBXXBNQ82CP
-- Enrolled April 2019 – June 2019
+- Enrolled April 2019, completed June 11, 2019
