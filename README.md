@@ -1,7 +1,7 @@
 # Coursera-ML-Week-4-Project
 - This repository contains the files for the final project for Week 4 of Course 7 - Machine Learning of Johns Hopkins Data Science Specialization
-- : The goal of the project is to build a model to predict the manner in which human subjects performed various exercises, across 20 different test cases.
-- : A report describing how I built the predictive model, how I used cross validation, and my estimate of the sample error is.
+- : The goal of the project is to build a model to predict the manner in which human subjects performed a dumbell curl, across 20 different test cases.
+- https://pjrowe.github.io/Coursera-ML-Week-4-Project/: A report describing how I built the random forest model, how I used cross validation, and my estimate of the sample error.  This report was generated using RMarkdown and includes the troubleshooting of one other machine learning technique - PCA decomposition.  
 
 
 # Phillip Rowe Coursework on Coursera
