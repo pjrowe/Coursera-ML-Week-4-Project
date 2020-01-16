@@ -1,6 +1,6 @@
 # Coursera-ML-Week-4-Project
 - This repository contains the files for the final project for Week 4 of Course 7 - Machine Learning of Johns Hopkins Data Science Specialization
-- https://pjrowe.github.io/Coursera-ML-Week-4-Project/: A report describing how I built a random forest model predictive model for determining the manner in which human subjects performed a dumbell curl, across 20 different test cases.  This report includes the troubleshooting of one other machine learning technique - PCA decomposition.
+- https://pjrowe.github.io/Coursera-ML-Week-4-Project/: A report describing how I built a random forest predictive model for determining the manner in which human subjects performed a dumbell curl, across 20 different test cases.  This report includes the troubleshooting of one other machine learning technique - PCA decomposition.
 - **index.Rmd** : the RMarkdown file containing the source code used for the analysis.
 
 
