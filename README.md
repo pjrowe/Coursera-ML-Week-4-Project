@@ -36,6 +36,6 @@ https://www.coursera.org/specializations/jhu-data-science?
 
 ## Stanford University on Coursera 
 ### Machine Learning with Professor Andrew Ng 
-#### 11 week course, 55+ hours
+#### Self paced 11 module course, 55+ hours
 https://www.coursera.org/account/accomplishments/verify/QPBXXBNQ82CP
 - Enrolled April 2019, completed June 11, 2019
