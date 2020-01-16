@@ -20,7 +20,7 @@ https://www.coursera.org/learn/machine-learning-asset-management-alternative-dat
 
 ## Johns Hopkins on Coursera 
 ### Data Science Specialization 
-#### 10 courses/ 140+ hours total
+#### 10 courses, 140+ hours total
 https://www.coursera.org/specializations/jhu-data-science?
 - Enrolled June 2019 – present
 - Course 1  - The Data Scientist’s Toolbox - completed June 2019
